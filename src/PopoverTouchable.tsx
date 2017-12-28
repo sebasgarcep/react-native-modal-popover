@@ -65,23 +65,17 @@ class PopoverTouchable extends React.PureComponent<Props, State> {
     ) {
       throw new Error('Popover touchable must have two children and the second one must be Popover');
     }
-    return (
-      <View>
-        {
-          React.cloneElement(children[0] as React.ReactElement<any>, {
-            ref: this.setRef,
-            onPress: this.onPress,
-          })
-        }
-        {
-          React.cloneElement(children[1] as React.ReactElement<any>, {
-            visible: this.state.showPopover,
-            onClose: this.onClosePopover,
-            fromRect: this.state.popoverAnchor,
-          })
-        }
-      </View>
-    );
+    return [
+      React.cloneElement(children[0] as React.ReactElement<any>, {
+        ref: this.setRef,
+        onPress: this.onPress,
+      }),
+      React.cloneElement(children[1] as React.ReactElement<any>, {
+        visible: this.state.showPopover,
+        onClose: this.onClosePopover,
+        fromRect: this.state.popoverAnchor,
+      })
+    ];
   }
 }
 
